@@ -30,6 +30,9 @@ check_runtime_prereqs() {
     echo "checking prereqs"
     [[ -z "$(which jq)" ]] && fatal "jq is not installed. See https://stedolan.github.io/jq/"
     [[ -z "$(which ibmcloud)" ]] && fatal "ibmcloud CLI is not installed"
+    if ! ibmcloud plugin list | grep power-iaas > /dev/null; then
+      fatal "The PowerVS CLI plugin is not installed. Install it by running: ibmcloud plugin install power-iaas"
+    fi
     ibmcloud iam oauth-tokens > /dev/null 2>&1 || fatal "Please log in with the ibmcloud CLI (ibmcloud login)"
 }
 
