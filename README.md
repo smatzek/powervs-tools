@@ -24,7 +24,7 @@ See the [COS upload README](./scripts/cos-upload/README.md) for a deeper descrip
 ## Change storage tier of all volumes attached to a VSI
 The [changeVSIVolumeTier.sh](./scripts/changeVSIVolumeTier.sh) allows you to change the storage tier of all volumes attached to a VSI.
 
-## Get a mapping a VSI's serial number/WWN to PowerVS volume name
+## Get a mapping of WWN/serial number to PowerVS volume name for all of a VSI's volumes
 The [getLPARVolumeWWNs.sh](./scripts/getLPARVolumeWWNs.sh) script outputs a table containing the mapping between a volume's serial number or WWN and its name in PowerVS for all volumes attached to a given VSI. This is useful to map disks as seen in the operating system to the corresponding PowerVS volume.
 
 ## Get VSI SRCs
