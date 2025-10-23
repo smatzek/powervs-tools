@@ -18,17 +18,17 @@ While the CL portion is IBM i specific, the shell scripts could easily be adapte
 See the [COS upload README](./scripts/cos-upload/README.md) for a deeper description of this script collection.
 
 ## Change storage tier of all volumes attached to a VSI
-The [changeVSIVolumeTier.sh](./scripts/changeVSIVolumeTier.sh) allows you to change the storage tier of all volumes attached to an VSI.
+The [changeVSIVolumeTier.sh](./scripts/changeVSIVolumeTier.sh) allows you to change the storage tier of all volumes attached to a VSI.
 
 Requires: [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) and [jq](https://jqlang.github.io/jq/) or [IBM Cloud Shell](https://www.ibm.com/products/cloud-shell).
 
-## Get a mapping an VSI's serial number/WWN to PowerVS volume name
+## Get a mapping a VSI's serial number/WWN to PowerVS volume name
 The [getLPARVolumeWWNs.sh](./scripts/getLPARVolumeWWNs.sh) script outputs a table containing the mapping between a volume's serial number or WWN and its name in PowerVS for all volumes attached to a given VSI. This is useful to map disks as seen in the operating system to the corresponding PowerVS volume.
 
 Requires: [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) and [jq](https://jqlang.github.io/jq/) or [IBM Cloud Shell](https://www.ibm.com/products/cloud-shell).
 
 ## Get VSI SRCs
-The [getSRCs.sh](./scripts/getSRCs.sh) script repeatedly displays an VSI's SRCs until it is stopped with CTRL-C.
+The [getSRCs.sh](./scripts/getSRCs.sh) script repeatedly displays a VSI's SRCs until it is stopped with CTRL-C.
 
 Requires: [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) and [jq](https://jqlang.github.io/jq/) or [IBM Cloud Shell](https://www.ibm.com/products/cloud-shell).
 
@@ -37,7 +37,7 @@ The [tagLPARandVolumes.sh](./scripts/tagLPARandVolumes.sh) script attaches or de
 
 Requires: [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) and [jq](https://jqlang.github.io/jq/) or [IBM Cloud Shell](https://www.ibm.com/products/cloud-shell).
 
-## Change an VSI's CPU and memory with a scheduled job
+## Change a VSI's CPU and memory with a scheduled job
 The [setVSIProcMem.sh](./scripts/setVSIProcMem.sh) script is used to change a VSI's processor and memory. It is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to increase or decrease proccessors and memory on a time schedule. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
 
 Since the script is intended to be called from the VSI that it is modifying some of its inputs are inside the script itself as variables that should be set. This make the CL code that calls the script simpler. See the script source for more information.
