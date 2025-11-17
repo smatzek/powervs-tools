@@ -13,7 +13,7 @@ All of the scripts require [jq](https://jqlang.github.io/jq/) to parse CLI or AP
 
 
 ## IBM i cloud object storage upload
-The [IBM i COS upload](./cos-upload) "script" is a collection of two bash scripts and a CL script that provide a reusable utility for uploading files to IBM Cloud Object Storage (COS).
+The [IBM i COS upload](./scripts/cos-upload) "script" is a collection of two bash scripts and a CL script that provide a reusable utility for uploading files to IBM Cloud Object Storage (COS).
 
 The CL portion allows COS uploads to be more easily tied into processes, for example generating PDFs versions of BRMS recovery reports uploading the reports to COS for safe keeping and controlled retention.
 
