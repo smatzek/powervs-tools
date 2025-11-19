@@ -40,3 +40,6 @@ Since the script is intended to be called from the VSI that it is modifying some
 
 ## Target a PowerVS workspace by name in IBM Cloud CLI
 The [icpiwstg](./scripts/icpiwstg) script is a simple utility script that targets a PowerVS workspace by name using the IBM Cloud PowerVS CLI. The IBM Cloud CLI command `ic pi ws tg` targets a specific workspace to operate against, but it requires you to specify the workspace CRN. The `icpiwstg` script allows you to target by name.
+
+## Batch creation and attachment of volumes
+The [addVolumes.sh](./scripts/addVolumes.sh) script creates and attaches multiple volumes to a VSI. Since it uses the bulk PowerVS CLI volume operations it can create multiple volumes in parallel, wait until they are all created, and then do a bulk attach to the VSI without requiring the user to do manual volume readiness checks on many volumes.
