@@ -31,7 +31,7 @@ The [getLPARVolumeWWNs.sh](./scripts/getLPARVolumeWWNs.sh) script outputs a tabl
 The [getSRCs.sh](./scripts/getSRCs.sh) script repeatedly displays a VSI's SRCs until it is stopped with CTRL-C.
 
 ## Tag a VSI and all attached volumes
-The [tagLPARandVolumes.sh](./scripts/tagLPARandVolumes.sh) script attaches or detaches user tags on a VSI and all its attached storage volumes. User tags can be used to help with billing analysis and resource filtering.
+The [tagLPARandVolumes.sh](./scripts/tagLPARandVolumes.sh) script attaches or detaches user tags on a VSI and all its attached storage volumes. User tags can be used to help with billing analysis and resource filtering. See [this blog](https://community.ibm.com/community/user/blogs/samuel-matzek1/2025/11/17/tagging-powervs-vsis-and-volumes-for-cost-analysis) for examples on how tagging can be used for cost analysis.
 
 ## Change a VSI's CPU and memory with a scheduled job
 The [setVSIProcMem.sh](./scripts/setVSIProcMem.sh) script is used to change a VSI's processor and memory. It is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to increase or decrease proccessors and memory on a time schedule. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
