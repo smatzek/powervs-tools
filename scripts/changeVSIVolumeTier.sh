@@ -17,7 +17,7 @@ usage() {
   # Display Help
     cat <<EOF
 Syntax: $ changeVSIVolumeTier.sh [-h] [-w WORKSPACE_NAME] [-i INSTANCE_NAME] [-t STORAGE_TIER]
-Changes the storage tier on all the volumes of a PowerVS instance.
+Change the storage tier on all the volumes of a PowerVS instance.
 
   h     print help
   w     the PowerVS workspace name

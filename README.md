@@ -22,7 +22,20 @@ While the CL portion is IBM i specific, the shell scripts could easily be adapte
 See the [COS upload README](./scripts/cos-upload/README.md) for a deeper description of this script collection.
 
 ## Change storage tier of all volumes attached to a VSI
-The [changeVSIVolumeTier.sh](./scripts/changeVSIVolumeTier.sh) allows you to change the storage tier of all volumes attached to a VSI.
+There are two scripts to change the storage tier of all volumes attached to a VSI.
+
+### changeVSIVolumeTier.sh
+The [changeVSIVolumeTier.sh](./scripts/changeVSIVolumeTier.sh) script uses the IBM Cloud CLI to change the volume tier. It is a general purpose script that can target different workspaces and VSIs.
+
+### changeVSIVolumeTierWithAPI.sh
+The [changeVSIVolumeTierWithAPI.sh](./scripts/changeVSIVolumeTierWithAPI.sh) script uses is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to change the volume tiers on a time schedule. For example, the volume speed could be increased before batch processing and decreased when it is finished. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
+
+Since the script is intended to be called from the VSI that it is modifying some of its inputs are inside the script itself as variables that should be set. This make the CL code that calls the script simpler. See the script source for more information.
+
+## Change a VSI's CPU and memory
+The [setVSIProcMem.sh](./scripts/setVSIProcMem.sh) script is used to change a VSI's processor and memory. It is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to increase or decrease proccessors and memory on a time schedule. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
+
+Since the script is intended to be called from the VSI that it is modifying some of its inputs are inside the script itself as variables that should be set. This make the CL code that calls the script simpler. See the script source for more information.
 
 ## Get a mapping of WWN/serial number to PowerVS volume name for all of a VSI's volumes
 The [getLPARVolumeWWNs.sh](./scripts/getLPARVolumeWWNs.sh) script outputs a table containing the mapping between a volume's serial number or WWN and its name in PowerVS for all volumes attached to a given VSI. This is useful to map disks as seen in the operating system to the corresponding PowerVS volume.
@@ -32,11 +45,6 @@ The [getSRCs.sh](./scripts/getSRCs.sh) script repeatedly displays a VSI's SRCs u
 
 ## Tag a VSI and all attached volumes
 The [tagLPARandVolumes.sh](./scripts/tagLPARandVolumes.sh) script attaches or detaches user tags on a VSI and all its attached storage volumes. User tags can be used to help with billing analysis and resource filtering. See [this blog](https://community.ibm.com/community/user/blogs/samuel-matzek1/2025/11/17/tagging-powervs-vsis-and-volumes-for-cost-analysis) for examples on how tagging can be used for cost analysis.
-
-## Change a VSI's CPU and memory with a scheduled job
-The [setVSIProcMem.sh](./scripts/setVSIProcMem.sh) script is used to change a VSI's processor and memory. It is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to increase or decrease proccessors and memory on a time schedule. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
-
-Since the script is intended to be called from the VSI that it is modifying some of its inputs are inside the script itself as variables that should be set. This make the CL code that calls the script simpler. See the script source for more information.
 
 ## Target a PowerVS workspace by name in IBM Cloud CLI
 The [icpiwstg](./scripts/icpiwstg) script is a simple utility script that targets a PowerVS workspace by name using the IBM Cloud PowerVS CLI. The IBM Cloud CLI command `ic pi ws tg` targets a specific workspace to operate against, but it requires you to specify the workspace CRN. The `icpiwstg` script allows you to target by name.
