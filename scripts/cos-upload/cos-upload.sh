@@ -13,6 +13,8 @@
 
 CURL_CMD="/QOpenSys/pkgs/bin/curl"
 JQ_CMD="/QOpenSys/pkgs/bin/jq"
+BASE64_CMD="/QOpenSys/pkgs/bin/base64"
+OPENSSL_CMD="/QOpenSys/usr/bin/openssl"
 
 usage() {
   # Display Help
@@ -80,11 +82,6 @@ validate_input() {
     fi
 }
 
-if [ $# -eq 0 ] ; then
-    usage
-    exit 0
-fi
-
 while getopts ":ha:b:f:i:c:o:" opt; do
   # for each argument present assign the correct value to override the default value
   # values defined after the flag are stored in $OPTARG
@@ -119,11 +116,19 @@ if [ "$token" == "null" ]; then
     fatal "An error occurred retreiving an IBM Cloud IAM token"
 fi
 
+MD5SUM=$(cat ${thefile} | $OPENSSL_CMD dgst -md5 -binary | $BASE64_CMD)
+rc=$?
+if [ $rc -ne 0 ] ; then
+    echo "\nError generating the 128 bit MD5SUM of ${thefile}."
+    exit $rc
+fi
+
 # We upload the file and use the --fail-with-body option. That option will fail curl if
 # it receives unsuccessful HTTP return codes
 echo "Uploading"
 $CURL_CMD --fail-with-body -H "Content-Type: text/html" \
     -H "Authorization: Bearer ${token}" \
+    -H "Content-MD5: ${MD5SUM}" \
     -X PUT "https://${COS_ENDPOINT}/${thebucket}/${OBJECT_NAME}" \
     -T $thefile
 rc=$?

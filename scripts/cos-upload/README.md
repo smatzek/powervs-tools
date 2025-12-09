@@ -6,7 +6,7 @@ The [CL program](./cos-upload.clp) allows the upload to be called by other CL co
 
 The CL program in turn calls a ["helper" script](./cos-upload-helper.sh) in PASE which handles the COS object naming, some parameter defaulting and allows the CL code to be simpler.
 
-The helper script then calls the general utility [cos-upload.sh](./cos-upload.sh) script which uses the `curl` and `jq` commands in the [IBM i open source packages](https://ibmi-oss-docs.readthedocs.io/en/latest/README.html) to communicate with IBM Cloud for authentication and upload.
+The helper script then calls the general utility [cos-upload.sh](./cos-upload.sh) script which uses the `curl`, `jq`, and `base64` commands in the [IBM i open source packages](https://ibmi-oss-docs.readthedocs.io/en/latest/README.html) to communicate with IBM Cloud for authentication and upload.
 
 ## IBM Cloud IAM policy set up
 The COS upload script uses an IBM Cloud IAM API key to log in and gain access to write to the bucket. This is different from the HMAC keys that are often used to access object storage buckets.
