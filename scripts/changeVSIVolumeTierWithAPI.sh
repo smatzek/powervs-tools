@@ -112,6 +112,7 @@ setVolumeTier() {
     rc=$?
     if [ $rc -ne 0 ] ; then
         echo "\nAn error occurred setting volume tier ${2} on volume ${1}."
+        exit $rc
     fi
 }
 
