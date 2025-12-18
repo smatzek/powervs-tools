@@ -51,3 +51,13 @@ The [icpiwstg](./scripts/icpiwstg) script is a simple utility script that target
 
 ## Batch creation and attachment of volumes
 The [addVolumes.sh](./scripts/addVolumes.sh) script creates and attaches multiple volumes to a VSI. Since it uses the bulk PowerVS CLI volume operations it can create multiple volumes in parallel, wait until they are all created, and then do a bulk attach to the VSI without requiring the user to do manual volume readiness checks on many volumes.
+
+## Get SSL certificates from a server
+The [getSSLCerts.sh](./scripts/getSSLCerts.sh) script retrieves certificates (CA certs and server certs) from the specified host and port and saves them to PEM files. While this script will run on AIX and Linux, it is particularly useful for fetching CA certificates and writing them to IFS on IBM i. This allows for easier adding of CAs to certificate stores in IBM i Digital Certificate Manager (DCM) because the PEM is fetched and stored on IFS which and the path to the PEM can be specified in DCM's import certificate screen.
+
+When the script runs, it outputs the PEM file name and the subject of the certificate in the file. This allows the user to correlate the file with the CA that is needed for import. In the following example, the `cert2.pem` file is associated with the `Let's Encrypt CN=13` intermediate CA.
+
+```
+cert1.pem: subject=CN = target.server.fqdn.com
+cert2.pem: subject=C = US, O = Let's Encrypt, CN = R13
+```
