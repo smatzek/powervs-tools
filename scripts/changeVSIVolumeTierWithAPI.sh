@@ -34,12 +34,12 @@ JQ_CMD="/QOpenSys/pkgs/bin/jq"
 usage() {
   # Display Help
     cat <<EOF
-Syntax: $ changeVSIVolumeTier-API.sh [-h] -a APIKEY_FILE -t TIER
+Syntax: $ changeVSIVolumeTierAPI.sh [-h] -a APIKEY_FILE -t TIER
 Change the storage tier on all the volumes of a PowerVS instance.
 
   h     print help
   a     the name of a file containing an IBM Cloud API key
-  t     the desired storage tier
+  t     the desired storage tier. Allowed values for the workspace can be found by using the "ibmcloud pi storage-tiers" CLI.
 EOF
 }
 

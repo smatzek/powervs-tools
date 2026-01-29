@@ -28,9 +28,14 @@ There are two scripts to change the storage tier of all volumes attached to a VS
 The [changeVSIVolumeTier.sh](./scripts/changeVSIVolumeTier.sh) script uses the IBM Cloud CLI to change the volume tier. It is a general purpose script that can target different workspaces and VSIs.
 
 ### changeVSIVolumeTierWithAPI.sh
-The [changeVSIVolumeTierWithAPI.sh](./scripts/changeVSIVolumeTierWithAPI.sh) script uses is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to change the volume tiers on a time schedule. For example, the volume speed could be increased before batch processing and decreased when it is finished. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
+The [changeVSIVolumeTierWithAPI.sh](./scripts/changeVSIVolumeTierWithAPI.sh) script is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to change the volume tiers on a time schedule. For example, the volume speed could be increased before batch processing and decreased when it is finished. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
 
 Since the script is intended to be called from the VSI that it is modifying some of its inputs are inside the script itself as variables that should be set. This make the CL code that calls the script simpler. See the script source for more information.
+
+### changeVSIVolumeTierWithAPI-multipleLPARs.sh
+The [changeVSIVolumeTierWithAPI-multipleLPARs.sh](./scripts/changeVSIVolumeTierWithAPI-multipleLPARs.sh) script allows the user to change the storage volume tier on all volumes attached to an LPAR. This variation of the script allows administration of multiple LPARs using a single script that takes the LPAR name and the storage tier name. The PowerVS details needed to make the API calls are set directly in the script source, which allows for simplification of the script parameters. This in turn makes it simpler to wrap with a CL program on IBM i similar to the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp).
+
+This is written using `curl`, `jq`, and `bash` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI.
 
 ## Change a VSI's CPU and memory
 The [setVSIProcMem.sh](./scripts/setVSIProcMem.sh) script is used to change a VSI's processor and memory. It is written using `curl` and `jq` and does not require the IBM Cloud CLI. This allows it to be run from within an IBM i or AIX VSI and could be used as part of a scheduled job to increase or decrease proccessors and memory on a time schedule. For IBM i, an adapted version of the [cos-upload CL program](./scripts/cos-upload/cos-upload.clp) could be used to make IBM i job scheduling easier.
